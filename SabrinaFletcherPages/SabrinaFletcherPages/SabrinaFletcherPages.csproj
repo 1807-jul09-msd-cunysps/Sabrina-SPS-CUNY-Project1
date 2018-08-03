@@ -236,6 +236,7 @@
     <Content Include="Scripts\intl-tel-input-master\src\css\sprite%402x.scss" />
     <Content Include="Scripts\intl-tel-input-master\src\css\sprite.scss" />
     <Content Include="Scripts\intl-tel-input-master\src\js\wrapper.js.ejs" />
+    <None Include="Properties\PublishProfiles\SabrinaFletcherPages - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.0.0-vsdoc.js" />
     <Content Include="Scripts\intl-tel-input-master\build\css\demo.css" />
     <Content Include="Scripts\intl-tel-input-master\build\css\intlTelInput.css" />
