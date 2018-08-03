@@ -1,0 +1,69 @@
+﻿html {
+    background-color: dimgrey
+}
+
+.banner {
+    text-align: center;
+    background-color: silver;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+li a {
+    text-decoration: none;
+    color: white
+}
+
+
+#navli {
+    display: inline;
+    padding-right: 10px;
+}
+
+
+li {
+    list-style-type: none;
+}
+
+.left-section {
+    float: left;
+    color: whitesmoke;
+    background-color: crimson
+}
+
+.right-section {
+    float: right;
+}
+
+.entire-thing {
+    display: inline-block;
+    width: 1000px;
+}
+
+ div > img {
+    width: 500px;
+    height: 700px;
+}
+
+nav {
+    background-color: crimson;
+    padding-top: 1px;
+    padding-bottom: 1px;
+}
+
+h1 {
+    color: whitesmoke;
+    text-align: center;
+}
+
+#banner{
+    padding-top: 40px;
+    padding-bottom: 40px;
+    padding-right:20px;
+    padding-left:20px;
+
+}
+
+#banner-nav {
+    background-color: darkcyan;
+}
