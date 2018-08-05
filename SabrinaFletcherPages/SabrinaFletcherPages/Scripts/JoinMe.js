@@ -1,5 +1,5 @@
 ﻿var addrElem = document.querySelector("#checkAddress");
-checkAddr.onblur = checkAdd();
+//checkAddr.onblur = checkAdd();
 
 
 
@@ -40,11 +40,11 @@ function checkAdd() {
     }
 }
 
-function Welcome() {
-    var firstName = document.querySelector("#exampleFirstName").value;
-    var data = document.querySelectorAll("input");
-    alert(`Welcome ${firstName}`);
-}
+//function Welcome() {
+//    var firstName = document.querySelector("#exampleFirstName").value;
+//    var data = document.querySelectorAll("input");
+//    alert(`Welcome ${firstName}`);
+//}
 
 function locationPopulate(json) {
     debugger;
@@ -79,7 +79,7 @@ function checkZipcodeWithFile() {
 }
 
 function checkZipcode() {
-    debugger;
+    //debugger;
     var zipcode = document.getElementById("zipcode").value;
     var clientKey = "js-WuScLxcZ2oBa71EDWgHrxMPxtqy5XsqNCZg2fFiaQgK9PXqXFoaCO5VXnwh7BavA";
     var url = "https://www.zipcodeapi.com/rest/" + clientKey + "/info.json/" + zipcode + "/radians";
@@ -105,20 +105,36 @@ function checkZipcode() {
 function validFirstName() {
     var fName = document.forms["ContactForm"]["firstName"];
     fName.required = true;
+    if (fName.value == "") {
+        alert("Enter a  first name");
+        return false;
+    }
+    return true;
 }
 
 function validLastName() {
     var lName = document.forms["ContactForm"]["lastName"];
     lName.required = true;
+    if (lName.value == "") {
+        alert("Enter a last name");
+        return false;
+    }
+    return true;
 }
 
 function validAge() {
     var age = document.getElementById("#exampleAge");
-    age.title = "Please enter a valid age."
+    //age.title = "Please enter a valid age."
     if (!isNaN(age)) {
-        if (age.)
+        if (age.value >= 18) {
             return true;
+        } else {
+            alert("Your not old enough");
+            return false;
+        }
+            
     } else {
+        alert("Enter a valid age in numbers")
         return false;
     }
 
@@ -127,8 +143,17 @@ function validAge() {
 function validGender() {
     var gender = document.forms["ContactForm"]["gender"];
     gender.required = true;
+    gender.pattern = "[0-110]";
+    if (gender.value == "") {
+        alert("Select a gender.");
+        return false;
+    }
+    return true;
 
 }
+
+function valid
+
 
 function validate() {
     var fName = document.forms["ContactForm"]["firstName"];
