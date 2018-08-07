@@ -4,22 +4,22 @@
 //checkAddr.onblur = checkAdd();
 
 
-//(function () {
-//    'use strict';
-//    window.addEventListener('blur', function () {
-//        var forms = document.getElementsByClassName('needs-validation');
+(function () {
+    'use strict';
+    window.addEventListener('blur', function () {
+        var forms = document.getElementsByClassName('needs-validation');
 
-//        var validation = Array.prototype.filter.call(forms, function (form) {
-//            form.addEventListener('submit', function (event) {
-//                if (form.checkValidity() === false) {
-//                    event.preventDefault();
-//                    event.stopPropagation();
-//                }
-//                form.classList.add('was-validated');
-//            }, false);
-//        });
-//    }, false);
-//})();
+        var validation = Array.prototype.filter.call(forms, function (form) {
+            form.addEventListener('submit', function (event) {
+                if (form.checkValidity() === false) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
+                form.classList.add('was-validated');
+            }, false);
+        });
+    }, false);
+})();
 
 
 function checkAdd() {
@@ -224,7 +224,7 @@ function validState() {
 }
 
 function validCountry() {
-    var country = document.forms["ContactForm"]["countryCode"];
+    var country = document.forms["ContactForm"]["country"];
     country.required = true;
     if (country.value != 0) {
         country.removeClass("is-invalid");
@@ -234,6 +234,19 @@ function validCountry() {
     }
     return false;
 }
+
+function validCountryCode() {
+    var countryCode = document.forms["ContactForm"]["countryCode"];
+    country.required = true;
+    if (country.value != 0) {
+        country.removeClass("is-invalid");
+        country.addClass("is-valid");
+        country.focus();
+        return true;
+    }
+    return false;
+}
+
 
 function validAreaCode() {
     var areaCode = document.forms["ContactForm"]["areaCode"];
@@ -253,7 +266,7 @@ function validAreaCode() {
 
 function validPhone() {
     var phone = document.forms["ContactForm"]["phone"];
-    var pattern = new RegExp("^[0-9]{7,18}");
+    var pattern = new RegExp("^[0-9]{7,18}$");
     phone.required = true;
     if (phone.value != "") {
         if (pattern.test(phone.value)) {
@@ -263,10 +276,63 @@ function validPhone() {
             return true;
         }
         else { return false; }
-    } else {
-        return false;
     }
+    return false;
 }
+
+function validZip() {
+    var zip = document.forms["ContactForm"]["zip"];
+    zip.required = true;
+    var pattern = new RegExp("^[0-9]{5,10}$");
+    if (zip.value != "") {
+        if (pattern.test(zip.value)) {
+            zip.removeClass("is-invalid");
+            zip.addClass("is-valid");
+            zip.focus();
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+    return false;
+}
+
+
+function checkValidForm() {
+    if (validFirstName()) {
+        if (validLastName()) {
+            if (validAge()) {
+                if (validGender()) {
+                    if (validZip()) {
+                        if (validHouse()) {
+                            if (validStreet()) {
+                                if (validCity()) {
+                                    if (validState()) {
+                                        if (validCountry()) {
+                                            if (validCountryCode()) {
+                                                if (validAreaCode()) {
+                                                    if (validPhone()) {
+                                                        alert("Person Subscribed");
+                                                        return true;
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    alert("Person failed");
+    return false;
+
+}
+
 
 
 function validate() {
