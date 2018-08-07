@@ -1,6 +1,25 @@
-﻿var addrElem = document.querySelector("#checkAddress");
+﻿//import { start } from "repl";
+
+//var addrElem = document.querySelector("#checkAddress");
 //checkAddr.onblur = checkAdd();
 
+
+//(function () {
+//    'use strict';
+//    window.addEventListener('blur', function () {
+//        var forms = document.getElementsByClassName('needs-validation');
+
+//        var validation = Array.prototype.filter.call(forms, function (form) {
+//            form.addEventListener('submit', function (event) {
+//                if (form.checkValidity() === false) {
+//                    event.preventDefault();
+//                    event.stopPropagation();
+//                }
+//                form.classList.add('was-validated');
+//            }, false);
+//        });
+//    }, false);
+//})();
 
 
 function checkAdd() {
@@ -105,54 +124,149 @@ function checkZipcode() {
 function validFirstName() {
     var fName = document.forms["ContactForm"]["firstName"];
     fName.required = true;
-    if (fName.value == "") {
-        alert("Enter a  first name");
-        return false;
+    if (fName.value != "") {
+        fName.removeClass("is-invalid");
+        fName.addClass("is-valid");
+        fName.focus();
+        return true;
+        //alert("Enter a  first name");
     }
-    return true;
+    return false;
+
 }
 
 function validLastName() {
     var lName = document.forms["ContactForm"]["lastName"];
     lName.required = true;
-    if (lName.value == "") {
-        alert("Enter a last name");
-        return false;
+    if (lName.value != "") {
+        lName.removeClass("is-invalid");
+        lName.addClass("is-valid");
+        lName.focus();
+        return true;
     }
-    return true;
+    return false;
 }
 
 function validAge() {
-    var age = document.getElementById("#exampleAge");
+    debugger;
+    var age = document.forms["ContactForm"]["Age"];
     //age.title = "Please enter a valid age."
-    if (!isNaN(age)) {
-        if (age.value >= 18) {
-            return true;
-        } else {
-            alert("Your not old enough");
-            return false;
-        }
-            
-    } else {
-        alert("Enter a valid age in numbers")
-        return false;
+    age.required = true;
+    if (age.value > 18 || age.value < 100) {
+        age.removeClass("is-invalid");
+        age.addClass("is-valid");
+        age.focus();
+        return true;
     }
-
+    return false;
 }
 
 function validGender() {
+    //debugger;
     var gender = document.forms["ContactForm"]["gender"];
     gender.required = true;
-    gender.pattern = "[0-110]";
-    if (gender.value == "") {
-        alert("Select a gender.");
-        return false;
+    if (gender.value != 0) {
+        gender.removeClass("is-invalid");
+        gender.addClass("is-valid");
+        gender.focus();
+        return true;
     }
-    return true;
+    return false;
 
 }
 
-function valid
+function validHouse() {
+    var house = document.forms["ContactForm"]["houseNum"];
+    house.required = true;
+    if (house.value != "") {
+        house.removeClass("is-invalid");
+        house.addClass("is-valid");
+        house.focus();
+        return true;
+    }
+    return false;
+}
+
+function validStreet() {
+    var street = document.forms["ContactForm"]["street1"];
+    street.required = true;
+    if (house.value != "") {
+        street.removeClass("is-invalid");
+        street.addClass("is-valid");
+        street.focus();
+        return true;
+    }
+    return false;
+}
+
+function validCity() {
+    var city = document.forms["ContactForm"]["city"];
+    city.required = true;
+    if (city.value != "") {
+        city.removeClass("is-invalid");
+        city.addClass("is-valid");
+        city.focus();
+        return true;
+    }
+    return false;
+}
+
+function validState() {
+    var state = document.forms["ContactForm"]["state"];
+    state.required = true;
+    if (state.value != "") {
+        state.removeClass("is-invalid");
+        state.addClass("is-valid");
+        state.focus();
+        return true;
+    }
+    return false;
+}
+
+function validCountry() {
+    var country = document.forms["ContactForm"]["countryCode"];
+    country.required = true;
+    if (country.value != 0) {
+        country.removeClass("is-invalid");
+        country.addClass("is-valid");
+        country.focus();
+        return true;
+    }
+    return false;
+}
+
+function validAreaCode() {
+    var areaCode = document.forms["ContactForm"]["areaCode"];
+    var pattern = new RegExp("^[0-9]{3}$");
+    areaCode.required = true;
+    if (areaCode.value != "") {
+        if (pattern.test(areaCode.value)) {
+            areaCode.removeClass("is-invalid");
+            areaCode.addClass("is-valid");
+            areaCode.focus();
+            return true;
+        }
+        else { return false; }
+    }
+    return false;
+}
+
+function validPhone() {
+    var phone = document.forms["ContactForm"]["phone"];
+    var pattern = new RegExp("^[0-9]{7,18}");
+    phone.required = true;
+    if (phone.value != "") {
+        if (pattern.test(phone.value)) {
+            phone.removeClass("is-invalid");
+            phone.addClass("is-valid");
+            phone.focus();
+            return true;
+        }
+        else { return false; }
+    } else {
+        return false;
+    }
+}
 
 
 function validate() {
