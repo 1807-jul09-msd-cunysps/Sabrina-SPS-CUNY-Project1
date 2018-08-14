@@ -4,7 +4,7 @@
 //checkAddr.onblur = checkAdd();
 
 
-(function () {
+(function() {
     'use strict';
     window.addEventListener('blur', function () {
         var forms = document.getElementsByClassName('needs-validation');
@@ -66,7 +66,7 @@ function checkAdd() {
 //}
 
 function locationPopulate(json) {
-    debugger;
+    //debugger;
     // var json = { "zip_code": "10017", "lat": 0.711263, "lng": -1.29106, "city": "New York", "state": "NY", "timezone": { "timezone_identifier": "America\/New_York", "timezone_abbr": "EDT", "utc_offset_sec": -14400, "is_dst": "T" }, "acceptable_city_names": [{ "city": "Grand Central", "state": "NY" }, { "city": "Manhattan", "state": "NY" }, { "city": "Nyc", "state": "NY" }] };
     json = JSON.parse(json);
     var state = document.getElementById("State");
@@ -224,11 +224,11 @@ function validState() {
 }
 
 function validCountry() {
-    var country = document.forms["ContactForm"]["country"];
+    var country = document.querySelector("#inlineCountryCode")
     country.required = true;
+    var pattern = new RegExp("^[0-9]*$");
     if (country.value != 0) {
-        country.removeClass("is-invalid");
-        country.addClass("is-valid");
+        if (pattern.test(country.value))
         country.focus();
         return true;
     }
@@ -236,20 +236,20 @@ function validCountry() {
 }
 
 function validCountryCode() {
-    var countryCode = document.forms["ContactForm"]["countryCode"];
+    var countryCode = document.querySelector("#inlineCountryCode");
     country.required = true;
+    var pattern = new RegExp("^[0-9]*$");
     if (country.value != 0) {
-        country.removeClass("is-invalid");
-        country.addClass("is-valid");
-        country.focus();
-        return true;
+        if (pattern.test(countryCode.value)) {
+            return true;
+        }
     }
     return false;
 }
 
 
 function validAreaCode() {
-    var areaCode = document.forms["ContactForm"]["areaCode"];
+    var areaCode = document.querySelector("#areaCode");
     var pattern = new RegExp("^[0-9]{3}$");
     areaCode.required = true;
     if (areaCode.value != "") {
@@ -265,13 +265,11 @@ function validAreaCode() {
 }
 
 function validPhone() {
-    var phone = document.forms["ContactForm"]["phone"];
+    var phone = document.querySelector("#phone");
     var pattern = new RegExp("^[0-9]{7,18}$");
     phone.required = true;
     if (phone.value != "") {
         if (pattern.test(phone.value)) {
-            phone.removeClass("is-invalid");
-            phone.addClass("is-valid");
             phone.focus();
             return true;
         }
@@ -298,114 +296,182 @@ function validZip() {
     return false;
 }
 
+function serializePerson() {
+    debugger;
+    let personJson = {
+        "firstName": document.querySelector("#exampleFirstName").value,
+        "lastName": document.querySelector("#exampleLastName").value,
+        "houseNum": document.querySelector("#houseNumber").value,
+        "street": document.querySelector("#Address1").value,
+        "city": document.querySelector("#City").value,
+        "country": document.querySelector("#Country").value,
+        "zip": document.querySelector("#zipcode").value,
+        "number": document.querySelector("#phone").value,
+        "state": document.querySelector("#State").value,
+        "areaCode": document.querySelector("#areaCode").value
+    };
+    var stringJSON = JSON.stringify(personJson);
+    return stringJSON;
+}
 
-function checkValidForm() {
-    if (validFirstName()) {
-        if (validLastName()) {
-            if (validAge()) {
-                if (validGender()) {
-                    if (validZip()) {
-                        if (validHouse()) {
-                            if (validStreet()) {
-                                if (validCity()) {
-                                    if (validState()) {
-                                        if (validCountry()) {
-                                            if (validCountryCode()) {
-                                                if (validAreaCode()) {
-                                                    if (validPhone()) {
-                                                        alert("Person Subscribed");
-                                                        return true;
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
+function serializeMessage() {
+    let messageJSON = {
+        "firstName": document.querySelector("#exampleFirstName").value,
+        "lastName": document.querySelector("#exampleLastName").value,
+        "email": document.querySelector("#email").value,
+        "message": document.querySelector("#message").value
+    };
+
+    return JSON.stringify(messageJSON, null, 2);
+}
+
+//http://localhost:50811/Views/Home/Index.cshtml
+//https://joinmewebapi.azurewebsites.net/api/Person
+
+
+function addPersonToDB() {
+    debugger;
+    $.post ({
+        url: "http://localhost:50811/api/Person",
+        contentType: "application/json",
+        data: serializePerson(),
+        dataType: "json",
+        success: function () {
+            alert("Person added to DB!");
+        },
+        error: function (response) {
+            alert(response.responseText);
+            alert(response.status);
         }
-    }
-    alert("Person failed");
-    return false;
+    });
+}
 
+function addMessageToDB() {
+    $.post({
+        url: "https://joinmewebapi.azurewebsites.net/api/Person",
+        contentType: "application/json",
+        data: serializeMessage(),
+        dataType: "json",
+        success: function () {
+            alert("Message added to DB!");
+        },
+        error: function (response) {
+            alert(response.responseText);
+            alert(response.status);
+        }
+    });
 }
 
 
 
-function validate() {
-    var fName = document.forms["ContactForm"]["firstName"];
-    var lName = document.forms["ContactForm"]["lastName"];
-    var age = document.forms["ContactForm"]["Age"];
-    var gender = document.forms["ContactForm"]["gender"];
-    var zip = document.forms["ContactForm"]["zip"];
-    var address = document.forms["ContactForm"]["address1"];
-    var state = document.forms["ContactForm"]["state"];
-    var city = document.forms["ContactForm"]["city"];
-    var country = document.forms["ContactForm"]["country"];
-    var countryCode = document.forms["ContactForm"]["countryCode"];
-    var areaCode = document.forms["ContactForm"]["areaCode"];
-    var phone = document.forms["ContactForm"]["phone"];
-    var ext = document.forms["ContactForm"]["ext"];
-    fName.required = true;
-    lName.required = true;
-    age.required = true;
-    gender.required = true;
-    zip.required = true;
-    address.required = true;
-    if (country.value == "US") {
-        state.required = true;
-    } else {
-        state.required = false;
-    }
 
-    city.required = true;
-    country.required = true;
-    countryCode.required = true;
-    if (country.value == "US") {
-        areaCode.required = true;
-    } else {
-        areaCode.required = false;
-    }
-    phone.required = true;
+//function checkValidForm() {
+//    if (validFirstName()) {
+//        if (validLastName()) {
+//            if (validAge()) {
+//                if (validGender()) {
+//                    if (validZip()) {
+//                        if (validHouse()) {
+//                            if (validStreet()) {
+//                                if (validCity()) {
+//                                    if (validState()) {
+//                                        if (validCountry()) {
+//                                            if (validCountryCode()) {
+//                                                if (validAreaCode()) {
+//                                                    if (validPhone()) {
+//                                                        alert("Person Subscribed");
+//                                                        return true;
+//                                                    }
+//                                                }
+//                                            }
+//                                        }
+//                                    }
+//                                }
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//    }
+//    alert("Person failed");
+//    return false;
 
-    var numbers = /^[0-9]+$/;
+//}
 
-    if ((fName.value == lName.value)) {
-        window.alert("Please enter different first and last names.");
-        fName.focus();
-        lName.focus();
-        return false;
-    }
 
-    if (age.value < 15) {
-        window.alert("Please enter a valid age.");
-        age.focus();
-        return false;
-    }
 
-    if (zip.value.match(numbers)) {
-        window.alert("Please enter only numbers.");
-        zip.focus();
-        return false;
-    }
+//function validate() {
+//    var fName = document.forms["ContactForm"]["firstName"];
+//    var lName = document.forms["ContactForm"]["lastName"];
+//    var age = document.forms["ContactForm"]["Age"];
+//    var gender = document.forms["ContactForm"]["gender"];
+//    var zip = document.forms["ContactForm"]["zip"];
+//    var address = document.forms["ContactForm"]["address1"];
+//    var state = document.forms["ContactForm"]["state"];
+//    var city = document.forms["ContactForm"]["city"];
+//    var country = document.forms["ContactForm"]["country"];
+//    var countryCode = document.forms["ContactForm"]["countryCode"];
+//    var areaCode = document.forms["ContactForm"]["areaCode"];
+//    var phone = document.forms["ContactForm"]["phone"];
+//    var ext = document.forms["ContactForm"]["ext"];
+//    fName.required = true;
+//    lName.required = true;
+//    age.required = true;
+//    gender.required = true;
+//    zip.required = true;
+//    address.required = true;
+//    if (country.value == "US") {
+//        state.required = true;
+//    } else {
+//        state.required = false;
+//    }
 
-    if (areaCode.value.match(numbers)) {
-        window.alert("Please enter only numbers");
-        areaCode.focus();
-        return false;
-    }
+//    city.required = true;
+//    country.required = true;
+//    countryCode.required = true;
+//    if (country.value == "US") {
+//        areaCode.required = true;
+//    } else {
+//        areaCode.required = false;
+//    }
+//    phone.required = true;
 
-    if (phone.value.match(numbers)) {
-        window.alert("Please enter only numbers");
-        phone.focus();
-        return false;
-    }
+//    var numbers = /^[0-9]+$/;
 
-    if ((ext.value != "") && (ext.value.match(numbers))) {
-        window.alert("Please enter numbers only");
-    }
-}
+//    if ((fName.value == lName.value)) {
+//        window.alert("Please enter different first and last names.");
+//        fName.focus();
+//        lName.focus();
+//        return false;
+//    }
+
+//    if (age.value < 15) {
+//        window.alert("Please enter a valid age.");
+//        age.focus();
+//        return false;
+//    }
+
+//    if (zip.value.match(numbers)) {
+//        window.alert("Please enter only numbers.");
+//        zip.focus();
+//        return false;
+//    }
+
+//    if (areaCode.value.match(numbers)) {
+//        window.alert("Please enter only numbers");
+//        areaCode.focus();
+//        return false;
+//    }
+
+//    if (phone.value.match(numbers)) {
+//        window.alert("Please enter only numbers");
+//        phone.focus();
+//        return false;
+//    }
+
+//    if ((ext.value != "") && (ext.value.match(numbers))) {
+//        window.alert("Please enter numbers only");
+//    }
+//}
 
