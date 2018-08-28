@@ -121,221 +121,49 @@ function checkZipcode() {
 }
 
 
-function validFirstName() {
-    var fName = document.forms["ContactForm"]["firstName"];
-    fName.required = true;
-    if (fName.value != "") {
-        fName.removeClass("is-invalid");
-        fName.addClass("is-valid");
-        fName.focus();
-        return true;
-        //alert("Enter a  first name");
-    }
-    return false;
-
-}
-
-function validLastName() {
-    var lName = document.forms["ContactForm"]["lastName"];
-    lName.required = true;
-    if (lName.value != "") {
-        lName.removeClass("is-invalid");
-        lName.addClass("is-valid");
-        lName.focus();
-        return true;
-    }
-    return false;
-}
-
-function validAge() {
-    debugger;
-    var age = document.forms["ContactForm"]["Age"];
-    //age.title = "Please enter a valid age."
-    age.required = true;
-    if (age.value > 18 || age.value < 100) {
-        age.removeClass("is-invalid");
-        age.addClass("is-valid");
-        age.focus();
-        return true;
-    }
-    return false;
-}
-
-function validGender() {
-    //debugger;
-    var gender = document.forms["ContactForm"]["gender"];
-    gender.required = true;
-    if (gender.value != 0) {
-        gender.removeClass("is-invalid");
-        gender.addClass("is-valid");
-        gender.focus();
-        return true;
-    }
-    return false;
-
-}
-
-function validHouse() {
-    var house = document.forms["ContactForm"]["houseNum"];
-    house.required = true;
-    if (house.value != "") {
-        house.removeClass("is-invalid");
-        house.addClass("is-valid");
-        house.focus();
-        return true;
-    }
-    return false;
-}
-
-function validStreet() {
-    var street = document.forms["ContactForm"]["street1"];
-    street.required = true;
-    if (house.value != "") {
-        street.removeClass("is-invalid");
-        street.addClass("is-valid");
-        street.focus();
-        return true;
-    }
-    return false;
-}
-
-function validCity() {
-    var city = document.forms["ContactForm"]["city"];
-    city.required = true;
-    if (city.value != "") {
-        city.removeClass("is-invalid");
-        city.addClass("is-valid");
-        city.focus();
-        return true;
-    }
-    return false;
-}
-
-function validState() {
-    var state = document.forms["ContactForm"]["state"];
-    state.required = true;
-    if (state.value != "") {
-        state.removeClass("is-invalid");
-        state.addClass("is-valid");
-        state.focus();
-        return true;
-    }
-    return false;
-}
-
-function validCountry() {
-    var country = document.querySelector("#inlineCountryCode")
-    country.required = true;
-    var pattern = new RegExp("^[0-9]*$");
-    if (country.value != 0) {
-        if (pattern.test(country.value))
-        country.focus();
-        return true;
-    }
-    return false;
-}
-
-function validCountryCode() {
-    var countryCode = document.querySelector("#inlineCountryCode");
-    country.required = true;
-    var pattern = new RegExp("^[0-9]*$");
-    if (country.value != 0) {
-        if (pattern.test(countryCode.value)) {
-            return true;
-        }
-    }
-    return false;
-}
-
-
-function validAreaCode() {
-    var areaCode = document.querySelector("#areaCode");
-    var pattern = new RegExp("^[0-9]{3}$");
-    areaCode.required = true;
-    if (areaCode.value != "") {
-        if (pattern.test(areaCode.value)) {
-            areaCode.removeClass("is-invalid");
-            areaCode.addClass("is-valid");
-            areaCode.focus();
-            return true;
-        }
-        else { return false; }
-    }
-    return false;
-}
-
-function validPhone() {
-    var phone = document.querySelector("#phone");
-    var pattern = new RegExp("^[0-9]{7,18}$");
-    phone.required = true;
-    if (phone.value != "") {
-        if (pattern.test(phone.value)) {
-            phone.focus();
-            return true;
-        }
-        else { return false; }
-    }
-    return false;
-}
-
-function validZip() {
-    var zip = document.forms["ContactForm"]["zip"];
-    zip.required = true;
-    var pattern = new RegExp("^[0-9]{5,10}$");
-    if (zip.value != "") {
-        if (pattern.test(zip.value)) {
-            zip.removeClass("is-invalid");
-            zip.addClass("is-valid");
-            zip.focus();
-            return true;
-        }
-        else {
-            return false;
-        }
-    }
-    return false;
-}
 
 function serializePerson() {
-    debugger;
+    //debugger;
+    var pid = Date.now();
     let personJson = {
+        "Pid": pid,
         "firstName": document.querySelector("#exampleFirstName").value,
         "lastName": document.querySelector("#exampleLastName").value,
-        "houseNum": document.querySelector("#houseNumber").value,
-        "street": document.querySelector("#Address1").value,
-        "city": document.querySelector("#City").value,
-        "country": document.querySelector("#Country").value,
-        "zip": document.querySelector("#zipcode").value,
-        "number": document.querySelector("#phone").value,
-        "state": document.querySelector("#State").value,
-        "areaCode": document.querySelector("#areaCode").value
+        "address": {
+            "Pid": pid,
+            "houseNum": document.querySelector("#houseNumber").value,
+            "street": document.querySelector("#Address1").value,
+            "city": document.querySelector("#City").value,
+            "country": document.querySelector("#Country").value,
+            "zip": document.querySelector("#zipcode").value,
+            "state": document.querySelector("#State").value
+        },
+        "phone": {
+            "Pid": pid,
+            "countryCode": document.querySelector("#countryCode").value,
+            "areaCode": document.querySelector("#areaCode").value,
+            "number": document.querySelector("#phone").value
+        }
+        
     };
+        //"address": {
+            
+        //},
+        //"phone": {
+        //    "countryCode": document.querySelector("#inlineCountryCode"),
+            
     var stringJSON = JSON.stringify(personJson);
     return stringJSON;
 }
 
-function serializeMessage() {
-    let messageJSON = {
-        "firstName": document.querySelector("#exampleFirstName").value,
-        "lastName": document.querySelector("#exampleLastName").value,
-        "email": document.querySelector("#email").value,
-        "message": document.querySelector("#message").value
-    };
-
-    return JSON.stringify(messageJSON, null, 2);
-}
-
-//http://localhost:50811/Views/Home/Index.cshtml
-//https://joinmewebapi.azurewebsites.net/api/Person
 
 
 function addPersonToDB() {
-    debugger;
+    //debugger;
     $.post ({
-        url: "http://localhost:50811/api/Person",
+        url: "https://phoneappwebserviceapi.azurewebsites.net/api/Person",
         contentType: "application/json",
         data: serializePerson(),
-        dataType: "json",
         success: function () {
             alert("Person added to DB!");
         },
@@ -346,21 +174,9 @@ function addPersonToDB() {
     });
 }
 
-function addMessageToDB() {
-    $.post({
-        url: "https://joinmewebapi.azurewebsites.net/api/Person",
-        contentType: "application/json",
-        data: serializeMessage(),
-        dataType: "json",
-        success: function () {
-            alert("Message added to DB!");
-        },
-        error: function (response) {
-            alert(response.responseText);
-            alert(response.status);
-        }
-    });
-}
+
+
+
 
 
 

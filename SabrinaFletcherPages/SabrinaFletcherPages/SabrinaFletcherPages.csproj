@@ -380,6 +380,7 @@
     <Content Include="Scripts\BootstrapFormHelpers\less\bootstrap-formhelpers.less" />
     <Content Include="Scripts\BootstrapFormHelpers\package.json" />
     <Content Include="Scripts\BootstrapFormHelpers\README.md" />
+    <Content Include="Scripts\Contact.js" />
     <Content Include="Scripts\esm\popper-utils.js" />
     <Content Include="Scripts\esm\popper-utils.min.js" />
     <Content Include="Scripts\esm\popper.js" />
@@ -745,6 +746,8 @@
     <Content Include="Scripts\bootstrap-4.1.3\site\_includes\callout-info-mediaqueries-breakpoints.md" />
     <Content Include="Scripts\bootstrap-4.1.3\site\_includes\callout-warning-color-assistive-technologies.md" />
     <Content Include="Scripts\bootstrap-4.1.3\_config.yml" />
+    <None Include="Properties\PublishProfiles\SabrinaFletcherPages - Web Deploy1.pubxml" />
+    <None Include="Properties\PublishProfiles\SabrinaFletcherPages20180827010339 - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />

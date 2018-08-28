@@ -67,62 +67,59 @@
                 <form name="ContactForm" onsubmit="return false" class="needs-validation" novalidate>
                     <div class="form-group col-md-6">
                         <label for="firstName">First Name</label>
-                        <input type="text" class="form-control is-invalid" id="exampleFirstName" placeholder="Enter your first name" name="firstName" />
+                        <input type="text" class="form-control" id="exampleFirstName" placeholder="Enter your first name" name="firstName" />
                         <div class="invalid-feedback">Please enter a First Name.</div>
                     </div>
                     <div class="form-group col-md-6">
                         <label for="lastName">LastName</label>
-                        <input type="text" class="form-control is-invalid" id="exampleLastName" name="lastName" placeholder="Enter your last name" />
+                        <input type="text" class="form-control" id="exampleLastName" name="lastName" placeholder="Enter your last name" />
                         <div class="invalid-feedback">Please enter a Last Name.</div>
                     </div>
                     <div class="form-group col-md-3">
                         <label for="Age">Age</label>
-                        <input type="number" class="form-control is-invalid" id="exampleAge" min="1" max="150" placeholder="Enter your age" name="Age" required />
+                        <input type="number" class="form-control" id="exampleAge" min="1" max="150" placeholder="Enter your age" name="Age" required />
                         <div class="invalid-feedback">Please enter an Age.</div>
                     </div>
                     <div class="form-group col-md-4">
-                        <label class="my-1 mra-2">Gender</label>
-                        <select class="custom-select my-1 mr-sm-2 is-invalid" id="inlineGenderSelectPref" name="gender" required>
-                            <option value="">Select Gender...</option>
-                            <option value="0">Male</option>
-                            <option value="1">Female</option>
-                            <option value="2">Do Not Say</option>
-                        </select>
+                        <label class="my-1 mra-2"> Select a Gender:     </label>
+                        <input type="radio" name="gender" value="male" required/> Male  
+                        <input type="radio" name="gender" value="female" /> Female 
+                        <input type="radio" name="gender" value="Do Not Say" /> Do Not Say 
                         <div class="invalid-feedback">Please enter a Gender.</div>
                     </div>
-                    <h3>Address</h3>
+                    <h3>Current Address</h3>
                     <div class="form-group col-md-8">
                         <label for="zipcode">Zipcode</label>
-                        <input type="text" class="form-control is-invalid" id="zipcode" name="zip" placeholder="Enter your Zipcode" onblur="checkZipcode()" required />
+                        <input type="text" class="form-control" id="zipcode" name="zip" placeholder="Enter your Zipcode" onblur="checkZipcode()" required />
                         <div class="invalid-feedback">Please enter a Zip Code.</div>
                     </div>
                     <div class="form-group col-md-8">
                         <label for="House Number1">House/Building No.1</label>
-                        <input type="text" class="form-control is-invalid" id="houseNumber" placeholder="Enter your House/Building number" name="houseNum" required />
+                        <input type="text" class="form-control" id="houseNumber" placeholder="Enter your House/Building number" name="houseNum" required />
                         <div class="invalid-feedback">Please enter a House/Building Number.</div>
                     </div>
                     <div class="form-group col-md-8">
                         <label for="StreetName1">Street Name 1</label>
-                        <input type="text" class="form-control is-invalid" id="Address1" placeholder="Enter your Street Name" name="street1" required/>
+                        <input type="text" class="form-control" id="Address1" placeholder="Enter your Street Name" name="street1" required/>
                         <div class="invalid-feedback">Please enter a Street Name.</div>
                     </div>
                     <div class="form-group col-md-8">
                         <label for="House Number2">House/Building No.2</label>
-                        <input type="text" class="form-control is-invalid" id="Address2" placeholder="Optional" onblur="validHouse()"/>
+                        <input type="text" class="form-control" id="Address2" placeholder="Optional" onblur="validHouse()"/>
                     </div>
                     <div class="form-group col-md-8">
                         <label for="StreetName2">Street Name 2</label>
-                        <input type="text" class="form-control is-invalid" id="Address2" placeholder="Optional" />
+                        <input type="text" class="form-control" id="Address2" placeholder="Optional" />
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-4">
                             <label for="City">City</label>
-                            <input type="text" class="form-control is-invalid" id="City" placeholder="Enter your City" name="city" required />
+                            <input type="text" class="form-control" id="City" placeholder="Enter your City" name="city" required />
                             <div class="invalid-feedback">Please enter a City.</div>
                         </div>
                         <div class="form-group col-md-4">
                             <label for="State">State</label>
-                            <input type="text" class="form-control is-invalid" id="State" placeholder="Enter your State" name="state"  required/>
+                            <input type="text" class="form-control" id="State" placeholder="Enter your State" name="state"  required/>
                             <div class="invalid-feedback">Please enter a State.</div>
                         </div>
 
@@ -134,12 +131,10 @@
                     </div>
                     <div class="form-group">
 
-                        <label for="AddressLine1">Is permanent addess the same as the </label>
-                        <select class="is-invalid" id="checkAddress" onblur="checkAdd()" name="checkAddress">
-                            <option selected>Select..</option>
-                            <option>Yes</option>
-                            <option>No</option>
-                        </select>
+                        <label for="AddressLine1">Is permanent addess the same as your Current Address?:</label>
+                        <input type="radio" name="checkAddress" value="Yes" id="checkAddress" onblur="checkAdd()" /> Yes
+                        <input type="radio" name="checkAddress" value="No" id="checkAddress" onblur="checkAdd()" /> No
+                 
                     </div>
                     <div class="form-group" id="houseNo2">
                     </div>
@@ -154,44 +149,22 @@
                     <h3>Contact Details</h3>
                     <div class="form-group col-md-3">
                         <label for="Country Code">Country Code</label>
-                        <select class="custom-select my-1 mr-sm-2 is-invalid" id="inlineCountryCode" name="countryCode" required>
-                            <option selected>Select Country Code...</option>
-                            <option value="1">1</option>
-                            <option value="2">93</option>
-                            <option value="3">355</option>
-                            <option value="4">1-684</option>
-                            <option value="5">880</option>
-                            <option value="6">1-246</option>
-                            <option value="7">355</option>
-                            <option value="8">53</option>
-                            <option value="9">33</option>
-                            <option value="10">1-876</option>
-                            <option value="11">509</option>
-                            <option value="12">44</option>
-                            <option value="13">41</option>
-                            <option value="14">1-787</option>
-                            <option value="15">52</option>
-                            <option value="16">86</option>
-                            <option value="17">1-809</option>
-                            <option value="18">91</option>
-                            <option value="19">39</option>
-                            <option value="20">212</option>
-                        </select>
+                        <input type="tel" class="form-control" id="countryCode" name="countryCode" placeholder="Enter a country code" required />
                         <div class="invalid-feedback">Please select a Country Code.</div>
                     </div>
                     <div class="form-group col-md-3">
                         <label for="areaCode">Area Code</label>
-                        <input type="text" class="form-control is-invalid" id="areaCode" name="areaCode" placeholder="Enter area code" required/>
+                        <input type="tel" class="form-control" id="areaCode" name="areaCode" placeholder="Enter area code" required/>
                         <div class="invalid-feedback">Please enter an area code.</div>
                     </div>
                     <div class="form-group col-md-3">
                         <label for="phone">Phone</label>
-                        <input type="tel" class="form-control is-invalid" id="phone" name="phone" placeholder="Enter phone number" required />
+                        <input type="tel" class="form-control" id="phone" name="phone" placeholder="Enter phone number" required />
                         <div class="invalid-feedback">Please enter a Phone Number.</div>
                     </div>
                     <div class="form-group col-md-3">
                         <label for="ext">Extension</label>
-                        <input type="text" class="form-control is-valid" id="ext" name="ext" placeholder="Enter extension" />
+                        <input type="tel" class="form-control" id="ext" name="ext" placeholder="Enter extension" />
                         <div class="invalid-feedback">Please enter an Extension if you have one.</div>
                     </div>
                     <button type="submit" onclick="addPersonToDB()" class="btn btn-primary my-1" >Submit</button>
