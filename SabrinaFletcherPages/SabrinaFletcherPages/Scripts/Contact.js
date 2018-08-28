@@ -1,8 +1,8 @@
 ﻿function serializeMessage() {
-    //debugger;
+    debugger;
     let messageJSON = {
-        "firstName": document.querySelector("#exampleFirstName").value,
-        "lastName": document.querySelector("#exampleLastName").value,
+        "firstName": document.querySelector("#FirstName").value,
+        "lastName": document.querySelector("#LastName").value,
         "email": document.querySelector("#email").value,
         "message": document.querySelector("#message").value
     };
@@ -13,7 +13,7 @@
 
 
 function addMessageToDB() {
-    //debugger;
+    debugger;
     $.post({
         url: "https://phoneappwebserviceapi.azurewebsites.net/api/Message",
         contentType: "application/json",
