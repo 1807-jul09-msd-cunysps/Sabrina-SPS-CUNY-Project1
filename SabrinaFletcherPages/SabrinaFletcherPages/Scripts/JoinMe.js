@@ -1,8 +1,4 @@
-﻿//import { start } from "repl";
-
-//var addrElem = document.querySelector("#checkAddress");
-//checkAddr.onblur = checkAdd();
-
+﻿
 
 (function() {
     'use strict';
@@ -20,6 +16,75 @@
         });
     }, false);
 })();
+
+function validName() {
+    
+    var firstName = $('#exampleFirstName').val();
+    var lastName = $('#exampleLastName').val();
+    if (firstName === lastName) {
+        inValid('#exampleFirstName');
+        inValid('#exampleLastName');
+    } else if ($('#exampleFirstName').val() == "") {
+        inValid('#exampleFirstName');
+    } else if ($('#exampleLastName').val() == "") {
+        inValid('#exampleLastName');
+    } else {
+        valid('#exampleFirstName');
+        valid('#exampleLastName');
+    }
+}
+
+//$("#exampleFirstName, #exampleLastName").on("blur", function () {
+//    debugger;
+//    if ($('#exampleFirstName').val().toUpperCase() === $('#exampleLastName').val().toUpperCase()) {
+//        inValid('#exampleFirstName');
+//        inValid('#exampleLastName');
+//    } else if ($('#exampleFirstName').val().toUpperCase() === $('#exampleLastName').val().toUpperCase()) {
+//        inValid('#exampleFirstName');
+//        inValid('#exampleLastName');
+//    } else if ($('#exampleFirstName').val() == "") {
+//        inValid('#exampleFirstName');
+//    } else if ($('#exampleLastName').val() == "") {
+//        inValid('#exampleLastName');
+//    } else {
+//        valid('#exampleFirstName');
+//        valid('#exampleLastName');
+//    }
+//});
+
+
+
+
+function valid(val){
+    $(val).removeClass("is-invalid");
+    $(val).addClass("is-valid");
+}
+
+
+function inValid(val) {
+    $(val).removeClass("is-valid");
+    $(val).addClass("is-invalid");
+}
+
+$("#joinme").on("submit", function () {
+    event.preventDefault();
+    debugger;
+    if (($("#exampleFirstName").val().toUpperCase() === $("#exampleLastName").val().toUpperCase())) {
+        $('#invalid-alert').removeClass("d-none");
+    } else if ($(".is-invalid")[0]) {
+        $('#invalid-alert').removeClass("d-none");
+    } else {
+        $('#invalid-alert').addClass("d-none");
+        addPersonToDB();
+    } 
+});
+
+
+function personInserted() {
+    $("#invalid-alert").addClass("d-none");
+    $("#success-alert").text('Thanks for Joining!');
+    $("#success-alert").removeClass("d-none");
+}
 
 
 function checkAdd() {
@@ -151,21 +216,23 @@ function serializePerson() {
         //},
         //"phone": {
         //    "countryCode": document.querySelector("#inlineCountryCode"),
-            
-    var stringJSON = JSON.stringify(personJson);
-    return stringJSON;
+
+    return personJson;
 }
 
 
 
 function addPersonToDB() {
     //debugger;
+    var stringPerson = JSON.stringify(serializeMessage());
     $.post ({
         url: "https://phoneappwebserviceapi.azurewebsites.net/api/Person",
-        contentType: "application/json",
-        data: serializePerson(),
+        crossDomain: true,
+        contentType: 'application/json',
+        data: stringPerson,
+        dataType: 'json',
         success: function () {
-            alert("Person added to DB!");
+            personInserted();
         },
         error: function (response) {
             alert(response.responseText);
@@ -179,115 +246,4 @@ function addPersonToDB() {
 
 
 
-
-
-//function checkValidForm() {
-//    if (validFirstName()) {
-//        if (validLastName()) {
-//            if (validAge()) {
-//                if (validGender()) {
-//                    if (validZip()) {
-//                        if (validHouse()) {
-//                            if (validStreet()) {
-//                                if (validCity()) {
-//                                    if (validState()) {
-//                                        if (validCountry()) {
-//                                            if (validCountryCode()) {
-//                                                if (validAreaCode()) {
-//                                                    if (validPhone()) {
-//                                                        alert("Person Subscribed");
-//                                                        return true;
-//                                                    }
-//                                                }
-//                                            }
-//                                        }
-//                                    }
-//                                }
-//                            }
-//                        }
-//                    }
-//                }
-//            }
-//        }
-//    }
-//    alert("Person failed");
-//    return false;
-
-//}
-
-
-
-//function validate() {
-//    var fName = document.forms["ContactForm"]["firstName"];
-//    var lName = document.forms["ContactForm"]["lastName"];
-//    var age = document.forms["ContactForm"]["Age"];
-//    var gender = document.forms["ContactForm"]["gender"];
-//    var zip = document.forms["ContactForm"]["zip"];
-//    var address = document.forms["ContactForm"]["address1"];
-//    var state = document.forms["ContactForm"]["state"];
-//    var city = document.forms["ContactForm"]["city"];
-//    var country = document.forms["ContactForm"]["country"];
-//    var countryCode = document.forms["ContactForm"]["countryCode"];
-//    var areaCode = document.forms["ContactForm"]["areaCode"];
-//    var phone = document.forms["ContactForm"]["phone"];
-//    var ext = document.forms["ContactForm"]["ext"];
-//    fName.required = true;
-//    lName.required = true;
-//    age.required = true;
-//    gender.required = true;
-//    zip.required = true;
-//    address.required = true;
-//    if (country.value == "US") {
-//        state.required = true;
-//    } else {
-//        state.required = false;
-//    }
-
-//    city.required = true;
-//    country.required = true;
-//    countryCode.required = true;
-//    if (country.value == "US") {
-//        areaCode.required = true;
-//    } else {
-//        areaCode.required = false;
-//    }
-//    phone.required = true;
-
-//    var numbers = /^[0-9]+$/;
-
-//    if ((fName.value == lName.value)) {
-//        window.alert("Please enter different first and last names.");
-//        fName.focus();
-//        lName.focus();
-//        return false;
-//    }
-
-//    if (age.value < 15) {
-//        window.alert("Please enter a valid age.");
-//        age.focus();
-//        return false;
-//    }
-
-//    if (zip.value.match(numbers)) {
-//        window.alert("Please enter only numbers.");
-//        zip.focus();
-//        return false;
-//    }
-
-//    if (areaCode.value.match(numbers)) {
-//        window.alert("Please enter only numbers");
-//        areaCode.focus();
-//        return false;
-//    }
-
-//    if (phone.value.match(numbers)) {
-//        window.alert("Please enter only numbers");
-//        phone.focus();
-//        return false;
-//    }
-
-//    if ((ext.value != "") && (ext.value.match(numbers))) {
-//        window.alert("Please enter numbers only");
-//    }
-//}
 

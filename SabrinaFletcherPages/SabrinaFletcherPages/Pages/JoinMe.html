@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="../Scripts/BootstrapFormHelpers/dist/css/bootstrap-formhelpers.min.css" />
 
 
-    <script src="../Scripts/jquery-3.3.1.min.js"></script>
+    <script src="../Scripts/jquery-3.3.1.js"></script>
     <script src="../Scripts/bootstrap-4.1.3/dist/js/bootstrap.min.js"></script>
     <script src="../Scripts/popper.min.js"></script>
     <script src="../Scripts/BootstrapFormHelpers/js/lang/en_US/bootstrap-formhelpers-countries.en_US.js"></script>
@@ -64,48 +64,48 @@
         </div>
         <div class="row">
             <div class="col-lg-12">
-                <form name="ContactForm" onsubmit="return false" class="needs-validation" novalidate>
+                <form name="ContactForm" id="joinme">
                     <div class="form-group col-md-6">
                         <label for="firstName">First Name</label>
-                        <input type="text" class="form-control" id="exampleFirstName" placeholder="Enter your first name" name="firstName" />
+                        <input type="text" class="form-control" id="exampleFirstName" placeholder="Enter your first name" name="firstName" pattern="[A-za-z]{2,20}" required/>
                         <div class="invalid-feedback">Please enter a First Name.</div>
                     </div>
                     <div class="form-group col-md-6">
                         <label for="lastName">LastName</label>
-                        <input type="text" class="form-control" id="exampleLastName" name="lastName" placeholder="Enter your last name" />
+                        <input type="text" class="form-control" id="exampleLastName" name="lastName" placeholder="Enter your last name" pattern="[A-za-z]{2,20}" required/>
                         <div class="invalid-feedback">Please enter a Last Name.</div>
                     </div>
                     <div class="form-group col-md-3">
                         <label for="Age">Age</label>
-                        <input type="number" class="form-control" id="exampleAge" min="1" max="150" placeholder="Enter your age" name="Age" required />
+                        <input type="number" class="form-control" id="exampleAge" min="15" max="101" placeholder="Enter your age" name="Age" pattern="[0-9]{2}" required />
                         <div class="invalid-feedback">Please enter an Age.</div>
                     </div>
                     <div class="form-group col-md-4">
                         <label class="my-1 mra-2"> Select a Gender:     </label>
                         <input type="radio" name="gender" value="male" required/> Male  
-                        <input type="radio" name="gender" value="female" /> Female 
-                        <input type="radio" name="gender" value="Do Not Say" /> Do Not Say 
+                        <input type="radio" name="gender" value="female" required/> Female 
+                        <input type="radio" name="gender" value="Do Not Say" required/> Do Not Say 
                         <div class="invalid-feedback">Please enter a Gender.</div>
                     </div>
                     <h3>Current Address</h3>
                     <div class="form-group col-md-8">
                         <label for="zipcode">Zipcode</label>
-                        <input type="text" class="form-control" id="zipcode" name="zip" placeholder="Enter your Zipcode" onblur="checkZipcode()" required />
+                        <input type="text" class="form-control" id="zipcode" name="zip" placeholder="Enter your Zipcode" onblur="checkZipcode()" pattern="[0-9]{5}" required />
                         <div class="invalid-feedback">Please enter a Zip Code.</div>
                     </div>
                     <div class="form-group col-md-8">
                         <label for="House Number1">House/Building No.1</label>
-                        <input type="text" class="form-control" id="houseNumber" placeholder="Enter your House/Building number" name="houseNum" required />
+                        <input type="text" class="form-control" id="houseNumber" placeholder="Enter your House/Building number" name="houseNum" pattern="[0-9]{1,8}" required />
                         <div class="invalid-feedback">Please enter a House/Building Number.</div>
                     </div>
                     <div class="form-group col-md-8">
                         <label for="StreetName1">Street Name 1</label>
-                        <input type="text" class="form-control" id="Address1" placeholder="Enter your Street Name" name="street1" required/>
+                        <input type="text" class="form-control" id="Address1" placeholder="Enter your Street Name" name="street1" pattern="[a-zA-z ]{1,50}" required/>
                         <div class="invalid-feedback">Please enter a Street Name.</div>
                     </div>
                     <div class="form-group col-md-8">
                         <label for="House Number2">House/Building No.2</label>
-                        <input type="text" class="form-control" id="Address2" placeholder="Optional" onblur="validHouse()"/>
+                        <input type="text" class="form-control" id="Address2" placeholder="Optional" />
                     </div>
                     <div class="form-group col-md-8">
                         <label for="StreetName2">Street Name 2</label>
@@ -114,12 +114,12 @@
                     <div class="form-row">
                         <div class="form-group col-md-4">
                             <label for="City">City</label>
-                            <input type="text" class="form-control" id="City" placeholder="Enter your City" name="city" required />
+                            <input type="text" class="form-control" id="City" placeholder="Enter your City" name="city" pattern="[a-zA-z ]{1,30}" required />
                             <div class="invalid-feedback">Please enter a City.</div>
                         </div>
                         <div class="form-group col-md-4">
                             <label for="State">State</label>
-                            <input type="text" class="form-control" id="State" placeholder="Enter your State" name="state"  required/>
+                            <input type="text" class="form-control" id="State" placeholder="Enter your State" name="state" pattern="[a-zA-z ]{1,30}" required/>
                             <div class="invalid-feedback">Please enter a State.</div>
                         </div>
 
@@ -129,12 +129,14 @@
                         <select class="bfh-countries is-invalid" data-country="US" name="country" id="Country" required></select>
                         <div class="invalid-feedback">Please select a Country.</div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" >
 
                         <label for="AddressLine1">Is permanent addess the same as your Current Address?:</label>
                         <input type="radio" name="checkAddress" value="Yes" id="checkAddress" onblur="checkAdd()" /> Yes
                         <input type="radio" name="checkAddress" value="No" id="checkAddress" onblur="checkAdd()" /> No
                  
+                    </div>
+                    <div class="form-group" id="address2">
                     </div>
                     <div class="form-group" id="houseNo2">
                     </div>
@@ -167,7 +169,9 @@
                         <input type="tel" class="form-control" id="ext" name="ext" placeholder="Enter extension" />
                         <div class="invalid-feedback">Please enter an Extension if you have one.</div>
                     </div>
-                    <button type="submit" onclick="addPersonToDB()" class="btn btn-primary my-1" >Submit</button>
+                    <div class="alert alert-danger d-none" id="invalid-alert" role="alert">Invalid Fields. Enter valid data.</div>
+                    <div class="alert alert-success d-none" id="success-alert" role="alert"></div>
+                    <button type="submit" class="btn btn-primary my-1" >Submit</button>
                 </form>
             </div>
         </div>
